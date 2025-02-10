@@ -1,8 +1,15 @@
 import flet as ft
 import calendar
+def create_calendar(year:int, month:int) -> tuple[ft.Row, list[ft.Row]]:
+    """Creates a month calendar from an input month and year
 
-# creating calendar for year and month
-def create_calendar(year, month):
+    Args:
+        year (int): The year to get
+        month (int): The month to get (0-12)
+
+    Returns:
+        tuple[Row, list[Row]]: Tuple containing a header and a list of weeks
+    """
     cal = calendar.monthcalendar(year, month)
     weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     
@@ -11,7 +18,7 @@ def create_calendar(year, month):
             for day in weekdays]
     )
 
-    days_grid = []
+    days_grid: list[ft.Row] = []
     for week in cal:
         days_grid.append(
             ft.Row([ft.Text(str(day) if day != 0 else "", size=24, width=60, text_align=ft.TextAlign.CENTER) 
@@ -20,8 +27,15 @@ def create_calendar(year, month):
     
     return header, days_grid
 
+
+def create_calendar_grid(month:calendar.Month, year:int):
+    """
+    This will implement a calendar using https://flet.dev/docs/controls/gridview/
+    """
+    raise NotImplementedError("Implement Calendar Grid")
+
 #main function what it gets outputted why is it like this i don't know but it's annoying..
-def main(page):
+def main(page: ft.Page):
 
     #just for base 
     current_year = 2025
@@ -60,7 +74,7 @@ def main(page):
         )
 
     # change the month
-    def prev_month(e):
+    def prev_month(event:ft.ControlEvent):
         nonlocal current_month, current_year
         # previous month
         if current_month == 1:
@@ -70,7 +84,7 @@ def main(page):
             current_month -= 1
         update_calendar()
 
-    def next_month(e):
+    def next_month(event:ft.ControlEvent):
         nonlocal current_month, current_year
         # next month
         if current_month == 12:
@@ -84,4 +98,4 @@ def main(page):
     update_calendar()
 
 # work app pls don't crash..
-ft.app(target=main)
+_ = ft.app(target=main)
