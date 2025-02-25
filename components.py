@@ -1,14 +1,13 @@
 import calendar
 from datetime import date
-from typing import Callable
+from typing import Callable, cast
 import flet
-# pyright: reportUnknownMemberType=false
 
 
-def create_calendar(start_date:date, end_date:date, on_day_click: Callable[[int], None]):
+def create_calendar(start_date: date, end_date: date, on_day_click: Callable[[int], None]):
     cell_width = 80
-    cal = calendar.monthcalendar(start_date.year,start_date.month)
-    
+    cal = calendar.monthcalendar(start_date.year, start_date.month)
+
     weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     header = flet.Container(flet.Row(
         [flet.Text(day, size=24, width=cell_width, text_align=flet.TextAlign.CENTER, color=flet.Colors.ON_PRIMARY)
@@ -39,17 +38,17 @@ def create_calendar(start_date:date, end_date:date, on_day_click: Callable[[int]
     return container
 
 
-def create_popup_month_picker(page: flet.Page, current_date:date):
+def create_popup_month_picker(page: flet.Page, current_date: date):
     row = flet.Row(
         controls=[
             flet.Text("Test"),
             flet.IconButton(
-                flet.Icons.CLOSE, 
-                flet.Colors.ON_SURFACE_VARIANT, 
+                flet.Icons.CLOSE,
+                flet.Colors.ON_SURFACE_VARIANT,
                 on_click=delete_popup_month_picker)
         ],
         alignment=flet.MainAxisAlignment.CENTER
-        )
+    )
     container = flet.Container(
         content=row,
         bgcolor=flet.Colors.SURFACE_CONTAINER_HIGHEST,
@@ -59,6 +58,7 @@ def create_popup_month_picker(page: flet.Page, current_date:date):
     )
     page.overlay.append(container)
 
-def delete_popup_month_picker(event:flet.ControlEvent):
-    event.page.overlay.clear()
-    event.page.update()
+
+def delete_popup_month_picker(event: flet.ControlEvent):
+    cast(flet.Page, event.page).overlay.clear()
+    cast(Callable[[], None],  cast(flet.Page, event.page).update)()
