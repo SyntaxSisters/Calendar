@@ -1,5 +1,5 @@
-from datetime import date, timedelta
-from flet.core.gesture_detector import GestureDetector
+from datetime import date
+from typing import Callable, cast
 import flet as ft
 import calendar
 import components
@@ -25,22 +25,22 @@ def main(page:ft.Page):
         event_list.controls.clear()
         selected_day.value = f"{calendar.month_name[current_date.month]} {current_date.day}, {current_date.year}"
         event_list.controls.append(ft.Text("No events yet.", color=ft.Colors.ON_SURFACE))
-        page.update()
+        cast(Callable[[],None],page.update)()
 
     # show the event input form
     def add_event(event:ft.ControlEvent):
         if not selected_day.value:  # check if a date is selected
             date_error.value = "Please select a date first."
-            page.update()
+            cast(Callable[[],None],page.update)()
         else:
             date_error.value = ""  # clear the error message
             event_form.visible = True  # mke the event form visible if a date is selected
-            page.update()
+            cast(Callable[[],None],page.update)()
 
     # cancel event input form
     def cancel_event(event:ft.ControlEvent):
         event_form.visible = False  # hide the event form
-        page.update()
+        cast(Callable[[],None],page.update)()
 
     
     dayEvents = ft.Container(
@@ -131,13 +131,13 @@ def main(page:ft.Page):
 
             # hide the form after submission
             event_form.visible = False
-            page.update()
+            cast(Callable[[],None],page.update)()
 
         event_form.controls = [
             title_input, location_input, description_input, start_time_input, end_time_input,
             ft.ElevatedButton("Submit Event", on_click=submit_event)
         ]
-        page.update()
+        cast(Callable[[],None],page.update)()
 
     # change the month
     def prev_month(event:ft.ControlEvent):
@@ -156,11 +156,11 @@ def main(page:ft.Page):
 
     # TODO open a date picker when the user clicks on the month title
     def open_date_picker_from_month(event:ft.ControlEvent):
-       components.create_popup_month_picker(event.page, current_date)
-       event.page.update()
+       components.create_popup_month_picker(cast(ft.Page,event.page), current_date)
+       cast(Callable[[],None],page.update)()
        
     update_calendar()
 
 
 # work app pls don't crash..
-ft.app(target=main)
+_ = cast(Callable[[Callable[[ft.Page],None]],None],ft.app)(main)
