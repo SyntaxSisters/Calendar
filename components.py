@@ -2,6 +2,7 @@ import calendar
 from datetime import date
 from typing import Callable
 import flet
+# pyright: reportUnknownMemberType=false
 
 
 def create_calendar(start_date:date, end_date:date, on_day_click: Callable[[int], None]):
