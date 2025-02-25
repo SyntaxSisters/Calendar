@@ -3,7 +3,7 @@ from typing import Callable, cast
 import flet as ft
 import calendar
 import components
-from dateutil.relativedelta import *
+from dateutil.relativedelta import relativedelta
 
 # main function
 
@@ -13,7 +13,6 @@ def main(page:ft.Page):
     
     current_date: date = date.today()
     selected_day = ft.Text("", size=18, color=ft.Colors.ON_SURFACE)
-    event_input = ft.TextField(label="Add Event", width=250)
     event_list = ft.Column()
 
     # hide the event input form at start
@@ -21,9 +20,9 @@ def main(page:ft.Page):
     # error message for date selection
     date_error = ft.Text("", color=ft.Colors.ON_ERROR, size=14)
 
-    def refresh_event_list(day):
+    def refresh_event_list(day:date):
         event_list.controls.clear()
-        selected_day.value = f"{calendar.month_name[current_date.month]} {current_date.day}, {current_date.year}"
+        selected_day.value = f"{calendar.month_name[day.month]} {day.day}, {day.year}"
         event_list.controls.append(ft.Text("No events yet.", color=ft.Colors.ON_SURFACE))
         cast(Callable[[],None],page.update)()
 
@@ -68,15 +67,15 @@ def main(page:ft.Page):
 
     def move_vertical_divider(e: ft.DragUpdateEvent):
         min_width,max_width=200,1000
-        if (e.delta_x > 0 and dayEvents.width < max_width):
+        if (e.delta_x > 0 and dayEvents.width and dayEvents.width < max_width):
             dayEvents.width = min(dayEvents.width + e.delta_x,max_width)
-        elif(e.delta_x < 0 and dayEvents.width > min_width):
+        elif(e.delta_x < 0 and dayEvents.width and dayEvents.width > min_width):
             dayEvents.width = max(dayEvents.width + e.delta_x,min_width)
         dayEvents.update()
 
     def show_draggable_cursor(e: ft.HoverEvent):
-        e.control.mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
-        e.control.update()
+        cast(ft.GestureDetector,e.control).mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
+        cast(ft.GestureDetector,e.control).update()
 
     # switching through months
     def update_calendar():
@@ -150,9 +149,9 @@ def main(page:ft.Page):
         current_date = current_date + relativedelta(months=1)
         update_calendar()
 
-    def on_day_click(day:int):
-        if day != 0:
-            refresh_event_list(day)
+    def on_day_click(clickedDay:int):
+        if clickedDay != 0:
+            refresh_event_list(current_date + relativedelta(day=clickedDay))
 
     # TODO open a date picker when the user clicks on the month title
     def open_date_picker_from_month(event:ft.ControlEvent):
