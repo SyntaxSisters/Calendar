@@ -1,22 +1,24 @@
 import calendar
 from typing import Callable
 import flet
-def create_calendar(year:int, month:int, on_day_click:Callable[[int],None]):
+
+
+def create_calendar(year: int, month: int, on_day_click: Callable[[int], None]):
     cell_width = 80
     cal = calendar.monthcalendar(year, month)
     weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     header = flet.Container(flet.Row(
         [flet.Text(day, size=24, width=cell_width, text_align=flet.TextAlign.CENTER, color=flet.Colors.ON_PRIMARY)
             for day in weekdays],
-    ),bgcolor=flet.Colors.PRIMARY)
-    
-    days_grid:list[flet.Control] = []
+    ), bgcolor=flet.Colors.PRIMARY)
+
+    days_grid: list[flet.Control] = []
     for week in cal:
         days_grid.append(
             flet.Row([
                 flet.Container(
                     content=flet.Text(str(day) if day != 0 else "", size=24,
-                                    color=flet.Colors.ON_PRIMARY_CONTAINER),
+                                      color=flet.Colors.ON_PRIMARY_CONTAINER),
                     width=cell_width,
                     height=cell_width,
                     bgcolor=flet.Colors.PRIMARY_CONTAINER if day != 0 else "transparent",
@@ -30,5 +32,25 @@ def create_calendar(year:int, month:int, on_day_click:Callable[[int],None]):
             ])
         )
     columns = flet.Column(controls=[header]+days_grid)
-    container = flet.Container(columns,bgcolor=flet.Colors.SURFACE,expand=1)
+    container = flet.Container(columns, bgcolor=flet.Colors.SURFACE, expand=1)
     return container
+
+
+def create_popup_month_picker(page: flet.Page, month:int):
+    row = flet.Row(controls=[
+        flet.Text("Test"),
+        flet.IconButton(
+            flet.Icons.CLOSE, 
+            flet.Colors.ON_SURFACE_VARIANT, 
+            on_click=delete_popup_month_picker)
+        ])
+    container = flet.Container(
+        content=row,
+        bgcolor=flet.Colors.SURFACE_CONTAINER_HIGHEST,
+        expand=True
+    )
+    page.overlay.append(container)
+
+def delete_popup_month_picker(event:flet.ControlEvent):
+    event.page.overlay.clear()
+    event.page.update()

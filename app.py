@@ -43,7 +43,7 @@ def main(page:ft.Page):
         page.update()
 
     
-    c = ft.Container(
+    dayEvents = ft.Container(
         content=ft.Column(
             [
                 ft.Text("Day Selected", size=20,
@@ -68,11 +68,11 @@ def main(page:ft.Page):
 
     def move_vertical_divider(e: ft.DragUpdateEvent):
         min_width,max_width=200,1000
-        if (e.delta_x > 0 and c.width < max_width):
-            c.width = min(c.width + e.delta_x,max_width)
-        elif(e.delta_x < 0 and c.width > min_width):
-            c.width = max(c.width + e.delta_x,min_width)
-        c.update()
+        if (e.delta_x > 0 and dayEvents.width < max_width):
+            dayEvents.width = min(dayEvents.width + e.delta_x,max_width)
+        elif(e.delta_x < 0 and dayEvents.width > min_width):
+            dayEvents.width = max(dayEvents.width + e.delta_x,min_width)
+        dayEvents.update()
 
     def show_draggable_cursor(e: ft.HoverEvent):
         e.control.mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
@@ -95,13 +95,13 @@ def main(page:ft.Page):
                 ft.Row([
                     ft.IconButton(
                         ft.Icons.ARROW_LEFT, on_click=prev_month, tooltip="Previous Month", width=40),
-                    ft.Text(
-                        f"{calendar.month_name[current_month]} {current_year}", size=18, color=ft.Colors.ON_SURFACE),
+                    ft.TextButton(
+                        f"{calendar.month_name[current_month]} {current_year}", on_click=open_date_picker_from_month),
                     ft.IconButton(
                         ft.Icons.ARROW_RIGHT, on_click=next_month, tooltip="Next Month", width=40),
                 ], alignment=ft.MainAxisAlignment.CENTER),
                 ft.Row([
-                    c, slider, cal
+                    dayEvents, slider, cal
                 ],expand=True)
             ],expand=True)
         )
@@ -139,8 +139,6 @@ def main(page:ft.Page):
         ]
         page.update()
 
-        
-
     # change the month
     def prev_month(event:ft.ControlEvent):
         nonlocal current_month, current_year
@@ -165,12 +163,9 @@ def main(page:ft.Page):
             refresh_event_list(day)
 
     # TODO open a date picker when the user clicks on the month title
-    # def open_date_picker_from_month(event:ft.ControlEvent):
-    #     picker = ft.DatePicker(on_change=select_date_from_month)
-    #     event.control.page.open(picker)
-
-    # def select_date_from_month(event:ft.ControlEvent):
-    #     event.control
+    def open_date_picker_from_month(event:ft.ControlEvent):
+       components.create_popup_month_picker(event.page, current_month)
+       event.page.update()
     update_calendar()
 
 
