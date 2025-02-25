@@ -1,11 +1,13 @@
 import calendar
+from datetime import date
 from typing import Callable
 import flet
 
 
-def create_calendar(year: int, month: int, on_day_click: Callable[[int], None]):
+def create_calendar(start_date:date, end_date:date, on_day_click: Callable[[int], None]):
     cell_width = 80
-    cal = calendar.monthcalendar(year, month)
+    cal = calendar.monthcalendar(start_date.year,start_date.month)
+    
     weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     header = flet.Container(flet.Row(
         [flet.Text(day, size=24, width=cell_width, text_align=flet.TextAlign.CENTER, color=flet.Colors.ON_PRIMARY)
@@ -36,18 +38,23 @@ def create_calendar(year: int, month: int, on_day_click: Callable[[int], None]):
     return container
 
 
-def create_popup_month_picker(page: flet.Page, month:int):
-    row = flet.Row(controls=[
-        flet.Text("Test"),
-        flet.IconButton(
-            flet.Icons.CLOSE, 
-            flet.Colors.ON_SURFACE_VARIANT, 
-            on_click=delete_popup_month_picker)
-        ])
+def create_popup_month_picker(page: flet.Page, current_date:date):
+    row = flet.Row(
+        controls=[
+            flet.Text("Test"),
+            flet.IconButton(
+                flet.Icons.CLOSE, 
+                flet.Colors.ON_SURFACE_VARIANT, 
+                on_click=delete_popup_month_picker)
+        ],
+        alignment=flet.MainAxisAlignment.CENTER
+        )
     container = flet.Container(
         content=row,
         bgcolor=flet.Colors.SURFACE_CONTAINER_HIGHEST,
-        expand=True
+        expand=True,
+        alignment=flet.alignment.center,
+        expand_loose=True
     )
     page.overlay.append(container)
 

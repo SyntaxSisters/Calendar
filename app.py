@@ -1,17 +1,17 @@
+from datetime import date, timedelta
 from flet.core.gesture_detector import GestureDetector
 import flet as ft
 import calendar
 import components
+from dateutil.relativedelta import *
 
 # main function
-
 
 def main(page:ft.Page):
 
     # just for base
-    current_year = 2025
-    current_month = 2
-
+    
+    current_date: date = date.today()
     selected_day = ft.Text("", size=18, color=ft.Colors.ON_SURFACE)
     event_input = ft.TextField(label="Add Event", width=250)
     event_list = ft.Column()
@@ -23,7 +23,7 @@ def main(page:ft.Page):
 
     def refresh_event_list(day):
         event_list.controls.clear()
-        selected_day.value = f"{calendar.month_name[current_month]} {day}, {current_year}"
+        selected_day.value = f"{calendar.month_name[current_date.month]} {current_date.day}, {current_date.year}"
         event_list.controls.append(ft.Text("No events yet.", color=ft.Colors.ON_SURFACE))
         page.update()
 
@@ -83,7 +83,7 @@ def main(page:ft.Page):
         page.controls.clear()
 
         cal = components.create_calendar(
-            current_year, current_month, on_day_click)
+            current_date.replace(day=1), current_date.replace(day=calendar.monthrange(current_date.year,current_date.month)[1]), on_day_click)
         slider = ft.GestureDetector(
             content=ft.VerticalDivider(),
             drag_interval=10,
@@ -96,7 +96,7 @@ def main(page:ft.Page):
                     ft.IconButton(
                         ft.Icons.ARROW_LEFT, on_click=prev_month, tooltip="Previous Month", width=40),
                     ft.TextButton(
-                        f"{calendar.month_name[current_month]} {current_year}", on_click=open_date_picker_from_month),
+                        f"{calendar.month_name[current_date.month]} {current_date.year}", on_click=open_date_picker_from_month),
                     ft.IconButton(
                         ft.Icons.ARROW_RIGHT, on_click=next_month, tooltip="Next Month", width=40),
                 ], alignment=ft.MainAxisAlignment.CENTER),
@@ -141,21 +141,13 @@ def main(page:ft.Page):
 
     # change the month
     def prev_month(event:ft.ControlEvent):
-        nonlocal current_month, current_year
-        if current_month == 1:
-            current_month = 12
-            current_year -= 1
-        else:
-            current_month -= 1
+        nonlocal current_date
+        current_date = current_date - relativedelta(months=1)
         update_calendar()
 
     def next_month(event:ft.ControlEvent):
-        nonlocal current_month, current_year
-        if current_month == 12:
-            current_month = 1
-            current_year += 1
-        else:
-            current_month += 1
+        nonlocal current_date
+        current_date = current_date + relativedelta(months=1)
         update_calendar()
 
     def on_day_click(day:int):
@@ -164,8 +156,9 @@ def main(page:ft.Page):
 
     # TODO open a date picker when the user clicks on the month title
     def open_date_picker_from_month(event:ft.ControlEvent):
-       components.create_popup_month_picker(event.page, current_month)
+       components.create_popup_month_picker(event.page, current_date)
        event.page.update()
+       
     update_calendar()
 
 
