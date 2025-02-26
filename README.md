@@ -17,4 +17,5 @@ A cross-platform calendar app built with Python and Flet
 ## Images
 <p align="center">
   <img src="https://github.com/user-attachments/assets/fecde1c4-59a1-48d0-ac90-a0f437fb3cf0" />
+  <img src="https://github.com/user-attachments/assets/09fe21a1-920f-46f5-b3e3-821f234c9e3c" />
 </p>
