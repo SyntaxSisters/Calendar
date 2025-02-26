@@ -3,7 +3,7 @@
   <img src="https://github.com/user-attachments/assets/df97e8a6-1a4c-4888-904e-f12a02e686d1" width="128"/>
 </p>
 
-# Calendar
+# Your Bestie
 A cross-platform calendar app built with Python and Flet
 
 ### Contributors:
