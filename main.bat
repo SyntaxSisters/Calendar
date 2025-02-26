@@ -6,10 +6,14 @@ if not exist ".venv\" (
     echo Virtual environment created.
     call .venv\Scripts\activate
     echo Installing Flet...
-    python -m pip install -r requirements.txt
+    python3 -m pip install -r requirements.txt
+    echo Installing python-dateutil...
+    pip install python-dateutil
 ) else (
     call .venv\Scripts\activate
-    python -m pip install -r requirements.txt
+    python3 -m pip install -r requirements.txt
+    echo Installing python-dateutil...
+    pip install python-dateutil
 )
 
 python app.py
