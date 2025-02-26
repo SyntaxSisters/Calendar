@@ -17,7 +17,7 @@
 
 ## 🚀 Features  
 ✅ Cross-platform compatibility (Windows & Linux)  
-✅ Built with Python & Flet
+✅ Built with Python & Flet  
 ✅ Simple installation and setup  
 
 ---
