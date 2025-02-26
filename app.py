@@ -5,10 +5,14 @@ import calendar
 import components
 from dateutil.relativedelta import relativedelta
 
+#TODO move this into a "Calendar View" class
 # main function
-
 def main(page:ft.Page):
+    """Entry point of application. This is called from Flet's initializer.
 
+    Args:
+        page (ft.Page): the Flet Page used to handle the window
+    """
     # just for base
     
     current_date: date = date.today()
@@ -21,6 +25,11 @@ def main(page:ft.Page):
     date_error = ft.Text("", color=ft.Colors.ON_ERROR, size=14)
 
     def refresh_event_list(day:date):
+        """Clear and repopulate the event list for the selected day
+
+        Args:
+            day (date): A date to populate events for
+        """
         event_list.controls.clear()
         selected_day.value = f"{calendar.month_name[day.month]} {day.day}, {day.year}"
         event_list.controls.append(ft.Text("No events yet.", color=ft.Colors.ON_SURFACE))
@@ -28,6 +37,11 @@ def main(page:ft.Page):
 
     # show the event input form
     def add_event(event:ft.ControlEvent):
+        """Display the event input form to create an event for a day
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
         if not selected_day.value:  # check if a date is selected
             date_error.value = "Please select a date first."
             cast(Callable[[],None],page.update)()
@@ -38,6 +52,11 @@ def main(page:ft.Page):
 
     # cancel event input form
     def cancel_event(event:ft.ControlEvent):
+        """Hide the event input form without creating an event
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
         event_form.visible = False  # hide the event form
         cast(Callable[[],None],page.update)()
 
@@ -66,6 +85,11 @@ def main(page:ft.Page):
     )
 
     def move_vertical_divider(e: ft.DragUpdateEvent):
+        """Called when the vertical divider is moved
+
+        Args:
+            e (ft.DragUpdateEvent): Event that has information about the mouse movement
+        """
         min_width,max_width=200,1000
         if (e.delta_x > 0 and dayEvents.width and dayEvents.width < max_width):
             dayEvents.width = min(dayEvents.width + e.delta_x,max_width)
@@ -74,12 +98,19 @@ def main(page:ft.Page):
         dayEvents.update()
 
     def show_draggable_cursor(e: ft.HoverEvent):
+        """Change the cursor to a resize cursor on a hover event
+
+        Args:
+            e (ft.HoverEvent): A hover event
+        """
         cast(ft.GestureDetector,e.control).mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
         cast(ft.GestureDetector,e.control).update()
 
     # switching through months
     def update_calendar():
-        page.controls.clear()
+        """Refresh the calendar view
+        """
+        cast(list[ft.Control],page.controls).clear()
 
         cal = components.create_calendar(
             current_date.replace(day=1), current_date.replace(day=calendar.monthrange(current_date.year,current_date.month)[1]), on_day_click)
@@ -119,6 +150,11 @@ def main(page:ft.Page):
             
         # submit the event (nothing saved for now but later it will)
         def submit_event(event:ft.ControlEvent):
+            """Add an event to the calendar
+
+            Args:
+                event (ft.ControlEvent): A button click event
+            """
             title = title_input.value
             location = location_input.value
             description = description_input.value
@@ -140,21 +176,41 @@ def main(page:ft.Page):
 
     # change the month
     def prev_month(event:ft.ControlEvent):
+        """Change the current stored month to the previous month
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
         nonlocal current_date
         current_date = current_date - relativedelta(months=1)
         update_calendar()
 
     def next_month(event:ft.ControlEvent):
+        """Change the current stored month to the next month
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
         nonlocal current_date
         current_date = current_date + relativedelta(months=1)
         update_calendar()
 
     def on_day_click(clickedDay:int):
+        """Change the event display to list events from a given day index
+
+        Args:
+            clickedDay (int): The index of the day of the month
+        """
         if clickedDay != 0:
             refresh_event_list(current_date + relativedelta(day=clickedDay))
 
     # TODO open a date picker when the user clicks on the month title
     def open_date_picker_from_month(event:ft.ControlEvent):
+        """Display a date picker
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
        components.create_popup_month_picker(cast(ft.Page,event.page), current_date)
        cast(Callable[[],None],page.update)()
        
