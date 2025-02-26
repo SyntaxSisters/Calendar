@@ -5,16 +5,18 @@ import calendar
 import components
 from dateutil.relativedelta import relativedelta
 
-#TODO move this into a "Calendar View" class
+# TODO move this into a "Calendar View" class
 # main function
-def main(page:ft.Page):
+
+
+def main(page: ft.Page):
     """Entry point of application. This is called from Flet's initializer.
 
     Args:
         page (ft.Page): the Flet Page used to handle the window
     """
     # just for base
-    
+
     current_date: date = date.today()
     selected_day = ft.Text("", size=18, color=ft.Colors.ON_SURFACE)
     event_list = ft.Column()
@@ -24,7 +26,7 @@ def main(page:ft.Page):
     # error message for date selection
     date_error = ft.Text("", color=ft.Colors.ON_ERROR, size=14)
 
-    def refresh_event_list(day:date):
+    def refresh_event_list(day: date):
         """Clear and repopulate the event list for the selected day
 
         Args:
@@ -32,11 +34,12 @@ def main(page:ft.Page):
         """
         event_list.controls.clear()
         selected_day.value = f"{calendar.month_name[day.month]} {day.day}, {day.year}"
-        event_list.controls.append(ft.Text("No events yet.", color=ft.Colors.ON_SURFACE))
-        cast(Callable[[],None],page.update)()
+        event_list.controls.append(
+            ft.Text("No events yet.", color=ft.Colors.ON_SURFACE))
+        cast(Callable[[], None], page.update)()
 
     # show the event input form
-    def add_event(event:ft.ControlEvent):
+    def add_event(event: ft.ControlEvent):
         """Display the event input form to create an event for a day
 
         Args:
@@ -44,23 +47,22 @@ def main(page:ft.Page):
         """
         if not selected_day.value:  # check if a date is selected
             date_error.value = "Please select a date first."
-            cast(Callable[[],None],page.update)()
+            cast(Callable[[], None], page.update)()
         else:
             date_error.value = ""  # clear the error message
             event_form.visible = True  # mke the event form visible if a date is selected
-            cast(Callable[[],None],page.update)()
+            cast(Callable[[], None], page.update)()
 
     # cancel event input form
-    def cancel_event(event:ft.ControlEvent):
+    def cancel_event(event: ft.ControlEvent):
         """Hide the event input form without creating an event
 
         Args:
             event (ft.ControlEvent): A button click event
         """
         event_form.visible = False  # hide the event form
-        cast(Callable[[],None],page.update)()
+        cast(Callable[[], None], page.update)()
 
-    
     dayEvents = ft.Container(
         content=ft.Column(
             [
@@ -90,11 +92,11 @@ def main(page:ft.Page):
         Args:
             e (ft.DragUpdateEvent): Event that has information about the mouse movement
         """
-        min_width,max_width=200,1000
+        min_width, max_width = 200, 1000
         if (e.delta_x > 0 and dayEvents.width and dayEvents.width < max_width):
-            dayEvents.width = min(dayEvents.width + e.delta_x,max_width)
-        elif(e.delta_x < 0 and dayEvents.width and dayEvents.width > min_width):
-            dayEvents.width = max(dayEvents.width + e.delta_x,min_width)
+            dayEvents.width = min(dayEvents.width + e.delta_x, max_width)
+        elif (e.delta_x < 0 and dayEvents.width and dayEvents.width > min_width):
+            dayEvents.width = max(dayEvents.width + e.delta_x, min_width)
         dayEvents.update()
 
     def show_draggable_cursor(e: ft.HoverEvent):
@@ -103,17 +105,18 @@ def main(page:ft.Page):
         Args:
             e (ft.HoverEvent): A hover event
         """
-        cast(ft.GestureDetector,e.control).mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
-        cast(ft.GestureDetector,e.control).update()
+        cast(ft.GestureDetector,
+             e.control).mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
+        cast(ft.GestureDetector, e.control).update()
 
     # switching through months
     def update_calendar():
         """Refresh the calendar view
         """
-        cast(list[ft.Control],page.controls).clear()
+        cast(list[ft.Control], page.controls).clear()
 
         cal = components.create_calendar(
-            current_date.replace(day=1), current_date.replace(day=calendar.monthrange(current_date.year,current_date.month)[1]), on_day_click)
+            current_date.replace(day=1), current_date.replace(day=calendar.monthrange(current_date.year, current_date.month)[1]), on_day_click)
         slider = ft.GestureDetector(
             content=ft.VerticalDivider(),
             drag_interval=10,
@@ -132,8 +135,8 @@ def main(page:ft.Page):
                 ], alignment=ft.MainAxisAlignment.CENTER),
                 ft.Row([
                     dayEvents, slider, cal
-                ],expand=True)
-            ],expand=True)
+                ], expand=True)
+            ], expand=True)
         )
 
         # Event input form
@@ -147,9 +150,9 @@ def main(page:ft.Page):
             label="Start Time", width=250)
         end_time_input = ft.TextField(
             label="End Time", width=250)
-            
+
         # submit the event (nothing saved for now but later it will)
-        def submit_event(event:ft.ControlEvent):
+        def submit_event(event: ft.ControlEvent):
             """Add an event to the calendar
 
             Args:
@@ -166,16 +169,16 @@ def main(page:ft.Page):
 
             # hide the form after submission
             event_form.visible = False
-            cast(Callable[[],None],page.update)()
+            cast(Callable[[], None], page.update)()
 
         event_form.controls = [
             title_input, location_input, description_input, start_time_input, end_time_input,
             ft.ElevatedButton("Submit Event", on_click=submit_event)
         ]
-        cast(Callable[[],None],page.update)()
+        cast(Callable[[], None], page.update)()
 
     # change the month
-    def prev_month(event:ft.ControlEvent):
+    def prev_month(event: ft.ControlEvent):
         """Change the current stored month to the previous month
 
         Args:
@@ -185,7 +188,7 @@ def main(page:ft.Page):
         current_date = current_date - relativedelta(months=1)
         update_calendar()
 
-    def next_month(event:ft.ControlEvent):
+    def next_month(event: ft.ControlEvent):
         """Change the current stored month to the next month
 
         Args:
@@ -195,7 +198,7 @@ def main(page:ft.Page):
         current_date = current_date + relativedelta(months=1)
         update_calendar()
 
-    def on_day_click(clickedDay:int):
+    def on_day_click(clickedDay: int):
         """Change the event display to list events from a given day index
 
         Args:
@@ -205,17 +208,17 @@ def main(page:ft.Page):
             refresh_event_list(current_date + relativedelta(day=clickedDay))
 
     # TODO open a date picker when the user clicks on the month title
-    def open_date_picker_from_month(event:ft.ControlEvent):
+    def open_date_picker_from_month(event: ft.ControlEvent):
         """Display a date picker
 
         Args:
             event (ft.ControlEvent): A button click event
         """
-       components.create_popup_month_picker(cast(ft.Page,event.page), current_date)
-       cast(Callable[[],None],page.update)()
-       
+        components.create_popup_month_picker(cast(ft.Page, page), current_date)
+        cast(Callable[[], None], page.update)()
+
     update_calendar()
 
 
 # work app pls don't crash..
-_ = cast(Callable[[Callable[[ft.Page],None]],None],ft.app)(main)
+_ = cast(Callable[[Callable[[ft.Page], None]], None], ft.app)(main)
