@@ -1,3 +1,4 @@
+<a id="readme-top"></a>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/df97e8a6-1a4c-4888-904e-f12a02e686d1" width="128"/>
 </p>
@@ -21,6 +22,8 @@ A cross-platform calendar app built with Python and Flet
             <img class="avatar avatar-user" src="https://avatars.githubusercontent.com/u/181734167?s=70&amp;v=4" width="50" height="50" alt="@MIGplusplus">
 </a>      </div>
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Installation & Setup
 Download and extract the project files.
    
@@ -36,6 +39,7 @@ Open a terminal in the project's folder and run
    python3 -m pip install -r requirements.txt
   ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Images
 <p align="center">
@@ -43,9 +47,9 @@ Open a terminal in the project's folder and run
   <img src="https://github.com/user-attachments/assets/09fe21a1-920f-46f5-b3e3-821f234c9e3c" />
 </p>
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## License
-Distributed under some License. See `LICENSE.txt` for more information.
-
-
+Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
