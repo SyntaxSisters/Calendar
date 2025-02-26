@@ -33,15 +33,17 @@ Make sure you have the following installed:
 
 ### **📌 Windows Users**  
 1. Download and extract the project files.  
-2. Open a terminal in the project's folder and run:  
+2. Open a terminal in the project's folder and run:
+ 
    ```sh
    ./main.bat
 ### **🐧 Linux Users**
 1. Download and extract the project files.  
-2. Open a terminal in the project's folder and run:  
-  ```sh
-  python3 -m pip install -r requirements.txt
-  ```
+2. Open a terminal in the project's folder and run:
+  
+    ```sh
+    python3 -m pip install -r requirements.txt
+    ```
 ---
 
 ### **Screenshots**
