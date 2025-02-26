@@ -17,7 +17,7 @@
 
 ## 🚀 Features  
 ✅ Cross-platform compatibility (Windows & Linux)  
-✅ Built with Python & Flet for smooth UI/UX  
+✅ Built with Python & Flet
 ✅ Simple installation and setup  
 
 ---
@@ -42,10 +42,32 @@ Make sure you have the following installed:
   ```sh
   python3 -m pip install -r requirements.txt
   ```
+---
+
 ### **Screenshots**
 <p align="center"> <img src="https://github.com/user-attachments/assets/fecde1c4-59a1-48d0-ac90-a0f437fb3cf0" width="400px"/> <img src="https://github.com/user-attachments/assets/09fe21a1-920f-46f5-b3e3-821f234c9e3c" width="400px"/> </p> 
 
+---
+
 ### **📜 License**
-Distributed under the GPL-3.0 License. See LICENSE for more information.
+Distributed under the **GPL-3.0 License**. See **LICENSE** for more information.
 
 <p align="right">(<a href="#readme-top">🔝 back to top</a>)</p>
+
+---
+
+## 👥 Contributors  
+Thanks to everyone who worked on this project! 🎉  
+
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/u/53645851?v=4" width="80" height="80" style="border-radius: 50;">
+  <img src="https://avatars.githubusercontent.com/u/105088697?v=4" width="80" height="80" style="border-radius: 50;">
+  <img src="https://avatars.githubusercontent.com/u/132782701?v=4" width="80" height="80" style="border-radius: 50;">
+  <img src="https://avatars.githubusercontent.com/u/169546501?v=4" width="80" height="80" style="border-radius: 50;">
+  <img src="https://avatars.githubusercontent.com/u/181520537?v=4" width="80" height="80" style="border-radius: 50;">
+  <img src="https://avatars.githubusercontent.com/u/181734167?v=4" width="80" height="80" style="border-radius: 50;">
+</p>
+
+
+<p align="right">(<a href="#readme-top">🔝 back to top</a>)</p>
+
