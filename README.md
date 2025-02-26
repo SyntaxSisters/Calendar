@@ -22,8 +22,6 @@ A cross-platform calendar app built with Python and Flet
             <img class="avatar avatar-user" src="https://avatars.githubusercontent.com/u/181734167?s=70&amp;v=4" width="50" height="50" alt="@MIGplusplus">
 </a>      </div>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Installation & Setup
 Download and extract the project files.
    
