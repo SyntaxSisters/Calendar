@@ -6,6 +6,9 @@
 # Your Bestie
 A cross-platform calendar app built with Python and Flet
 
+## Requirements
+- Ensure **`pip`** is installed properly on your machine
+- Ensure python 3.x is installed
 
 ## Installation & Setup
 Download and extract the project files.
