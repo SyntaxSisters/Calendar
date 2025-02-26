@@ -175,6 +175,7 @@ def main(page: ft.Page):
             title_input, location_input, description_input, start_time_input, end_time_input,
             ft.ElevatedButton("Submit Event", on_click=submit_event)
         ]
+        
         cast(Callable[[], None], page.update)()
 
     # change the month
