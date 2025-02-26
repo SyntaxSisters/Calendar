@@ -25,10 +25,17 @@ A cross-platform calendar app built with Python and Flet
 Download and extract the project files.
    
 ### **Windows Users**
-Double-click **`main.bat`** to set up the environment and run the app.
+Open a terminal in the project's folder and run
+   ```sh
+   ./main.bat
+  ```
 
 ### **Linux Users**
-Open a terminal in the folder containing the project files and run **`python3 -m pip install -r requirements.txt`** to run the app.
+Open a terminal in the project's folder and run
+   ```sh
+   python3 -m pip install -r requirements.txt
+  ```
+
 
 ## Images
 <p align="center">
