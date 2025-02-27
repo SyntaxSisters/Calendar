@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, date, time
 from typing import Any
 import uuid
-
+import flet as ft
 class calendar_event:
     start_date: date = date.today()
     start_time: time = datetime.now().time()
@@ -21,3 +21,15 @@ class calendar_event:
 class calendar_events:
     events:list[calendar_event] = []
     
+    @staticmethod
+    def show_create_event_popup(event: ft.ControlEvent) -> None:
+        raise NotImplementedError("Event creation is not yet implemented!")
+
+    @staticmethod
+    def add_event(event: calendar_event) -> None:
+        """Add an event to the calendar
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
+        raise NotImplementedError("Event creation is not yet implemented!")

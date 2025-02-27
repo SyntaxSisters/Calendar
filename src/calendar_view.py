@@ -1,0 +1,104 @@
+import calendar
+from datetime import date
+from typing import Callable
+from dateutil.relativedelta import relativedelta
+import flet as ft
+
+
+class calendar_view(ft.Column):
+    _selected_day: ft.Text = ft.Text("", size=18, color=ft.Colors.ON_SURFACE)
+    _date_error: ft.Text = ft.Text("", color=ft.Colors.ON_ERROR, size=14)
+    _start_date: date
+    _end_date: date
+
+    def __init__(
+        self, start_date: date, end_date: date, on_day_click: Callable[[int], None]
+    ):
+        _: None = super().__init__()  # pyright: ignore[reportUnknownMemberType]
+        cell_width: int = 80
+        cal = calendar.monthcalendar(start_date.year, start_date.month)
+        self._start_date = start_date
+        self._end_date = start_date
+        weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        header: ft.Row = ft.Row(
+            [
+                ft.IconButton(
+                    ft.Icons.ARROW_LEFT,
+                    on_click=self.prev_month,
+                    tooltip="Previous Month",
+                    width=40,
+                ),
+                ft.TextButton(
+                    f"{calendar.month_name[self._start_date.month]} {self._end_date.year}"
+                    # on_click=open_date_picker_from_month,
+                ),
+                ft.IconButton(
+                    ft.Icons.ARROW_RIGHT,
+                    on_click=self.next_month,
+                    tooltip="Next Month",
+                    width=40,
+                ),
+            ]
+        )
+        weekday_header = ft.Container(
+            ft.Row(
+                [
+                    ft.Text(
+                        day,
+                        size=24,
+                        width=cell_width,
+                        text_align=ft.TextAlign.CENTER,
+                        color=ft.Colors.ON_PRIMARY,
+                    )
+                    for day in weekdays
+                ],
+            ),
+            bgcolor=ft.Colors.PRIMARY,
+        )
+
+        days_grid: list[ft.Control] = []
+        for week in cal:
+            days_grid.append(
+                ft.Row(
+                    [
+                        ft.Container(
+                            content=ft.Text(
+                                str(day) if day != 0 else "",
+                                size=24,
+                                color=ft.Colors.ON_PRIMARY_CONTAINER,
+                            ),
+                            width=cell_width,
+                            height=cell_width,
+                            bgcolor=ft.Colors.PRIMARY_CONTAINER
+                            if day != 0
+                            else "transparent",
+                            border_radius=5,
+                            border=ft.border.all(1, "white"),
+                            alignment=ft.alignment.center,
+                            on_click=lambda e, d=day: on_day_click(d)
+                            if d != 0
+                            else None,
+                        )
+                        for day in week
+                    ]
+                )
+            )
+        self.controls: list[ft.Control] = [header, weekday_header] + days_grid
+
+    def prev_month(self, event: ft.ControlEvent):
+        """Change the current stored month to the previous month
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
+        self._start_date += relativedelta(months=-1)
+        self._end_date
+
+    def next_month(self, event: ft.ControlEvent):
+        """Change the current stored month to the next month
+
+        Args:
+            event (ft.ControlEvent): A button click event
+        """
+        self._start_date += relativedelta(months=1)
+        self._start_date
