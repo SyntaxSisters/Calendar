@@ -54,6 +54,7 @@ class gui:
             self._day_view.refresh_event_list(
                 self._current_date + relativedelta(day=clickedDay)
             )
+            self.refresh()
 
     def open_date_picker_from_month(self, event: ft.ControlEvent):
         """Display a date picker
@@ -74,6 +75,7 @@ class gui:
             self._current_date + relativedelta(day=1),
             utils.get_last_date_in_month(self._current_date),
             self.on_day_click,
+            page=page
         )
         self._day_view = day_view(date.today())
         self._slider = ft.GestureDetector(
