@@ -44,6 +44,14 @@ class day_view(ft.Container):
         """
         self.event_list.controls.clear()
         self.day_label.value = f"{calendar.month_name[day.month]} {day.day}, {day.year}"
-        self.event_list.controls.append(
-            ft.Text("No events yet.", color=ft.Colors.ON_SURFACE)
-        )
+        
+        events = event.calendar_events.get_events_for_day(day)
+    
+        if events:
+            for ev in events:
+                self.event_list.controls.append(ft.Text(f"{ev.title} - {ev.start_time.strftime('%H:%M')}"))
+        else:
+            self.event_list.controls.append(ft.Text("No events yet.", color=ft.Colors.ON_SURFACE))
+        
+        self.update()
+
