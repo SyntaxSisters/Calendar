@@ -44,17 +44,18 @@ class gui:
         cast(ft.GestureDetector, e.control).update()
 
     def on_day_click(self, clickedDay: int):
-        """Change the event display to list events from a given day index
+        """Change the event display to list events from a given day index"""
 
-        Args:
-            clickedDay (int): The index of the day of the month
-        """
         if clickedDay != 0:
-            # Relativedelta(day=[num]) sets the day instead of adds it. To add days it would be days instead of day
-            self._day_view.refresh_event_list(
-                self._current_date + relativedelta(day=clickedDay)
-            )
+            selected_date = self._calendar._start_date.replace(day=clickedDay)
+
+
+            self._current_date = selected_date
+
+            self._day_view.refresh_event_list(self._current_date)
+
             self.refresh()
+
 
     def open_date_picker_from_month(self, event: ft.ControlEvent):
         """Display a date picker
