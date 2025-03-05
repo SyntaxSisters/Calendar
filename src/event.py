@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, date, time
+import pickle
 from typing import Any
 import uuid
 import flet as ft
@@ -39,3 +40,12 @@ class calendar_events:
         """Retrieve events scheduled for a given day."""
         return [event for event in calendar_events.events if event.start_date == day]
     
+    @staticmethod
+    def save_events(filepath:str):
+        with open(filepath, "wb") as file:
+            pickle.dump(calendar_events.events,file)
+    
+    @staticmethod
+    def load_events(filepath:str):
+        with open(filepath, "rb") as file:
+            calendar_events.events = pickle.load(file)
