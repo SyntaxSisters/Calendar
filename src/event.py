@@ -24,7 +24,7 @@ class calendar_events:
     @staticmethod
     def show_create_event_popup(event: ft.ControlEvent) -> None:
         raise NotImplementedError("Event creation is not yet implemented!")
-
+    
     @staticmethod
     def add_event(event: calendar_event) -> None:
         """Add an event to the calendar
@@ -33,3 +33,9 @@ class calendar_events:
             event (ft.ControlEvent): A button click event
         """
         raise NotImplementedError("Event creation is not yet implemented!")
+
+    @staticmethod
+    def get_events_for_day(day: date) -> list[calendar_event]:
+        """Retrieve events scheduled for a given day."""
+        return [event for event in calendar_events.events if event.start_date == day]
+    
