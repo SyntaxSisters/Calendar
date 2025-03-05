@@ -74,9 +74,8 @@ class gui:
         self._calendar = calendar_view(
             self._current_date + relativedelta(day=1),
             utils.get_last_date_in_month(self._current_date),
-            self.on_day_click,
-            page=page
-        )
+            self.on_day_click
+            )
         self._day_view = day_view(date.today())
         self._slider = ft.GestureDetector(
             content=ft.VerticalDivider(),
