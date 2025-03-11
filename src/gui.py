@@ -56,6 +56,7 @@ class gui:
             )
             self.refresh()
 
+
     def open_date_picker_from_month(self, event: ft.ControlEvent):
         """Display a date picker
 
