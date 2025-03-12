@@ -1,7 +1,7 @@
 from multiprocessing import Pool
+import re
 
 from pypdf import PdfReader
-import regex
 
 def extract_text(filename: str):
     text: str = ""
@@ -13,7 +13,7 @@ def extract_text(filename: str):
 
 def word_transformer(word: str)->str:
     #remove non-word characters like commas or periods
-    word = regex.sub(r"[^\w'-]", "", word)
+    word = re.sub(r"[^\w'-]", "", word)
     return word.lower()
 
 skipped_words: set[str] = {"after",
@@ -36,7 +36,7 @@ def word_filter(word: str):
     if len(word) < 4:
         # skip short words that likely show up too frequently to be a useful indicator of content
         return False
-    if regex.search(r"\d", word):
+    if re.search(r"\d", word):
         # contains number and is therefore not a valid word
         return False
     if word in skipped_words:
