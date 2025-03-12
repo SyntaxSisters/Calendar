@@ -9,10 +9,7 @@ class calendar_event:
     duration: timedelta = timedelta(hours=1)
     tags:list[str] = []
     title:str = "Untitled Event"
-    location: dict[str, type[float]] = {
-        'latitude':float,
-        'longitude':float
-    }
+    location: tuple[float,float] = (0,0)
     repetitions:int = 1
     id:uuid.UUID = uuid.uuid4()
     attachments:list[list[Any]] = []
