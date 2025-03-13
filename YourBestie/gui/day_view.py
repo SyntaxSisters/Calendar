@@ -1,8 +1,9 @@
 from datetime import date
 import flet as ft
 import calendar
-import event
 from flet.core.types import BorderRadiusValue
+
+from database import event
 
 class day_view(ft.Container):
     event_list: ft.Column = ft.Column()

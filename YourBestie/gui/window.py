@@ -1,11 +1,11 @@
 from flet.core.gesture_detector import GestureDetector
 from datetime import date
-from day_view import day_view
-from calendar_view import calendar_view
+from .day_view import day_view
+from .calendar_view import calendar_view
 from typing import Callable, cast
 import flet as ft
 
-import components
+from . import components
 from dateutil.relativedelta import relativedelta
 import utils
 

@@ -1,6 +1,6 @@
 from typing import Callable, cast
 import flet as ft
-from gui import gui
+from gui.window import gui
 def main(page: ft.Page):
     """Entry point of application. This is called from Flet's initializer.
 
