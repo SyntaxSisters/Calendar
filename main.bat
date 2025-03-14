@@ -6,9 +6,9 @@ if not exist ".venv\" (
     echo Virtual environment created.
     call .venv\Scripts\activate
     echo Installing Flet...
-    python3 -m pip install -r requirements.txt
+    python -m pip install -r requirements.txt
     echo Installing python-dateutil...
-    pip install python-dateutil
+    python -m pip install python-dateutil
 ) else (
     call .venv\Scripts\activate
     python3 -m pip install -r requirements.txt
@@ -16,4 +16,4 @@ if not exist ".venv\" (
     pip install python-dateutil
 )
 
-python app.py
+python YourBestie\main.py
