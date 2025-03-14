@@ -30,7 +30,7 @@ class gui:
             e.delta_x < 0 and self._day_view.width and self._day_view.width > min_width
         ):
             self._day_view.width = max(self._day_view.width + e.delta_x, min_width)
-        self._day_view.update()
+        self._day_view.update() 
 
     def show_draggable_cursor(self, e: ft.HoverEvent):
         """Change the cursor to a resize cursor on a hover event
@@ -51,8 +51,9 @@ class gui:
         """
         if clickedDay != 0:
             # Relativedelta(day=[num]) sets the day instead of adds it. To add days it would be days instead of day
+            self._current_date = self._calendar._start_date + relativedelta(day=clickedDay)
             self._day_view.refresh_event_list(
-                self._current_date + relativedelta(day=clickedDay)
+                self._current_date
             )
             self.refresh()
 
