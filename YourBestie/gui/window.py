@@ -2,12 +2,8 @@ from flet.core.gesture_detector import GestureDetector
 from datetime import date
 from .day_view import day_view
 from .calendar_view import calendar_view
-from typing import Callable, cast
+from typing import cast
 import flet as ft
-
-from . import components
-from dateutil.relativedelta import relativedelta
-import utils
 
 
 class gui:
@@ -43,39 +39,23 @@ class gui:
         ).mouse_cursor = ft.MouseCursor.RESIZE_LEFT_RIGHT
         cast(ft.GestureDetector, e.control).update()
 
-    def on_day_click(self, clickedDay: int):
+    def on_day_click(self, clickedDay: date):
         """Change the event display to list events from a given day index
 
         Args:
             clickedDay (int): The index of the day of the month
         """
-        if clickedDay != 0:
-            # Relativedelta(day=[num]) sets the day instead of adds it. To add days it would be days instead of day
-            self._current_date = self._calendar._start_date + relativedelta(day=clickedDay)
-            self._day_view.refresh_event_list(
-                self._current_date
-            )
-            self.refresh()
-
-
-    def open_date_picker_from_month(self, event: ft.ControlEvent):
-        """Display a date picker
-
-        Args:
-            event (ft.ControlEvent): A button click event
-        """
-        components.create_popup_month_picker(self._page, self._current_date)
-        cast(Callable[[], None], self._page.update)()
-
-    def refresh(self):
-        """Refresh the calendar view"""
+        # Relativedelta(day=[num]) sets the day instead of adds it. To add days it would be days instead of day
+        self._current_date = clickedDay
+        self._day_view.refresh_event_list(
+            self._current_date
+        )
         self._page.update() # pyright: ignore[reportUnknownMemberType]
-
+        
     def __init__(self, page: ft.Page):
         self._page = page
         self._calendar = calendar_view(
-            self._current_date + relativedelta(day=1),
-            utils.get_last_date_in_month(self._current_date),
+            self._current_date,
             self.on_day_click
             )
         self._day_view = day_view(date.today())
