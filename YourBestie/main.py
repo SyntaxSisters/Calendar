@@ -9,7 +9,7 @@ def main(page: ft.Page):
     """
     
     application = gui(page)
-    application.refresh()
+    application._page.update() # pyright: ignore[reportUnknownMemberType,reportPrivateUsage]
 
 # work app pls don't crash..
 _ = cast(Callable[[Callable[[ft.Page], None]], None], ft.app)(main)
