@@ -141,3 +141,7 @@ class calendar_view(ft.Column):
         )
         self.build()
         self.page.update() # pyright: ignore[reportUnknownMemberType, reportOptionalMemberAccess]
+def get_last_date_in_month(day: date):
+    return day + relativedelta(
+        day=calendar.monthrange(date.today().year, date.today().month)[1]
+    )
