@@ -125,7 +125,7 @@ class calendar_view(ft.Column):
             # on_click=open_date_picker_from_month,
         )
         self.build()
-        self.page.update()
+        self.page.update() # pyright: ignore[reportUnknownMemberType, reportOptionalMemberAccess]
 
     def next_month(self, event: ft.ControlEvent):
         """Change the current stored month to the next month
@@ -140,4 +140,4 @@ class calendar_view(ft.Column):
             # on_click=open_date_picker_from_month,
         )
         self.build()
-        self.page.update()
+        self.page.update() # pyright: ignore[reportUnknownMemberType, reportOptionalMemberAccess]
