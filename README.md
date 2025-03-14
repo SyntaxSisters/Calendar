@@ -24,7 +24,7 @@
 
 ## 📋 Requirements  
 Make sure you have the following installed:  
-- **Python 3.x**  
+- **Python 3.13 or higher**  
 - **pip** (Python package manager)  
 
 ---
