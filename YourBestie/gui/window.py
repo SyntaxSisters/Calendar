@@ -58,13 +58,31 @@ class gui:
             self._current_date,
             self.on_day_click
             )
+        self._calendar.expand = False
+        self._calendar.adaptive = False
         self._day_view = day_view(date.today())
+        self._day_view.expand = True
         self._slider = ft.GestureDetector(
-            content=ft.VerticalDivider(),
+            content=ft.VerticalDivider(visible=True),
             drag_interval=10,
             on_pan_update=self.move_vertical_divider,
             on_hover=self.show_draggable_cursor,
+            
         )
         self._page.controls=[
             ft.Row(controls=[self._day_view,self._slider,self._calendar])
             ]
+
+    def refresh(self):
+        self._slider = ft.GestureDetector(
+            content=ft.VerticalDivider(visible=True),
+            drag_interval=10,
+            on_pan_update=self.move_vertical_divider,
+            on_hover=self.show_draggable_cursor,
+            
+        )
+        cast(list[ft.Control],self._page.controls).clear()
+        self._page.controls=[
+            ft.Row(controls=[self._day_view,self._slider,self._calendar])
+            ]
+        self._page.update() # pyright: ignore[reportUnknownMemberType]

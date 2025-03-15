@@ -29,6 +29,8 @@ class calendar_view(ft.Column):
         self._date_display = ft.TextButton(
                     f"{calendar.month_name[self._start_date.month]} {self._end_date.year}",
                     on_click=self.open_date_picker_from_month,
+                    expand=True,
+
                 )
         weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         self._header = ft.Row(
@@ -46,7 +48,9 @@ class calendar_view(ft.Column):
                     tooltip="Next Month",
                     width=40,
                 ),
-            ]
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            expand=True
         )
         weekday_header = ft.Container(
             ft.Row(
@@ -86,8 +90,10 @@ class calendar_view(ft.Column):
                 widget.height = cell_width
                 week.controls.append(widget)
             weeks.append(week)
-
+        self._header.expand = True
+        self.expand_loose
         self.controls: list[ft.Control] = [self._header, weekday_header] + weeks
+       
 
     def prev_month(self, _: ft.ControlEvent):
         """Change the current stored month to the previous month
