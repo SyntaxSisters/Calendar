@@ -25,7 +25,7 @@ class day_view(ft.Container):
                 ft.Row(
                     [
                         ft.ElevatedButton(
-                            "Add Event", on_click=event.calendar_events.show_create_event_popup
+                            "Add Event", on_click=lambda e: event.calendar_events.show_create_event_popup(e)
                         )
                     ],
                     spacing=10,
@@ -46,7 +46,7 @@ class day_view(ft.Container):
         self.event_list.controls.clear()
         self.day_label.value = f"{calendar.month_name[day.month]} {day.day}, {day.year}"
         
-        events = event.calendar_events.get_events_for_day(day)
+        events = calendar_events.get_events_for_day(day)
     
         if events:
             for ev in events:

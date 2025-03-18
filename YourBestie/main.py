@@ -7,7 +7,6 @@ def main(page: ft.Page):
     Args:
         page (ft.Page): the Flet Page used to handle the window
     """
-    
     application = gui(page)
     application._page.update() # pyright: ignore[reportUnknownMemberType,reportPrivateUsage]
 
