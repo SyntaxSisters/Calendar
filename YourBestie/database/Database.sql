@@ -1,5 +1,5 @@
 CREATE TABLE Usr(
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(32),
     password VARCHAR(64)
 );
@@ -18,7 +18,7 @@ CREATE TABLE Usr_Grp(
 );
 
 CREATE TABLE Evnt(
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     beginning DATETIME,
     ending DATETIME,
     title VARCHAR(100),
