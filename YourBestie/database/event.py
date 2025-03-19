@@ -21,9 +21,9 @@ class calendar_events:
     events: list[calendar_event] = []
 
     @staticmethod
-    def show_create_event_popup(e):
+    def show_create_event_popup(e, day):
         
-        start_date = ft.DatePicker(value=date.today())
+        start_date = ft.DatePicker(value=day)
         start_time = ft.TimePicker(value=datetime.now().time())
         duration = ft.TextField(value="1:00", label="Duration (HH:MM)")
         tags = ft.TextField(value="", label="Tags (comma-separated)")
@@ -32,7 +32,7 @@ class calendar_events:
         repetitions = ft.TextField(value="", label="Repetitions")
         id_value = uuid.uuid4()
         attachments = ft.TextField(value="", label="Attachments (URLs)")
-        
+
         content=ft.Container(
             content=ft.Column(
                 [

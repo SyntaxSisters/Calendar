@@ -25,7 +25,7 @@ class day_view(ft.Container):
                 ft.Row(
                     [
                         ft.ElevatedButton(
-                            "Add Event", on_click=lambda e: event.calendar_events.show_create_event_popup(e)
+                            "Add Event", on_click=lambda e: event.calendar_events.show_create_event_popup(e, day)
                         )
                     ],
                     spacing=10,
