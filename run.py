@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import sys
 import subprocess
@@ -17,7 +19,7 @@ if not os.path.exists(venv_dir):
     print("Virtual environment created.")
 
 if sys.platform == "win32":
-    run_command(f"call {venv_activate} && {PYTHON_EXE} -m pip install -r Calendar/requirements.txt && {PYTHON_EXE} -m pip install python-dateutil")
+    run_command(f"call {venv_activate} && {PYTHON_EXE} -m pip install -r requirements.txt && {PYTHON_EXE} -m pip install python-dateutil")
 else:
     run_command(f"source {venv_activate} && {PYTHON_EXE} -m pip install -r requirements.txt && {PYTHON_EXE} -m pip install python-dateutil")
 
