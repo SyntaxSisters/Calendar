@@ -50,6 +50,7 @@ class gui:
         self._day_view.refresh_event_list(
             self._current_date
         )
+        self._calendar.update()
         self._page.update() # pyright: ignore[reportUnknownMemberType]
         
     def __init__(self, page: ft.Page):
