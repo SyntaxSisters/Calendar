@@ -1,43 +1,43 @@
-CREATE TABLE User(
+CREATE TABLE Usr(
     id INT PRIMARY KEY,
     username VARCHAR(32),
-    passsword VARCHAR(64)
-)
+    password VARCHAR(64)
+);
 
-CREATE TABLE Group(
+CREATE TABLE Grp(
     id INT PRIMARY KEY,
     title VARCHAR(32)
-)
+);
 
-CREATE TABLE User_Group(
+CREATE TABLE Usr_Grp(
     user_id INT,
     group_id INT,
     PRIMARY KEY (user_id, group_id),
-    FOREIGN KEY (user_id) REFERENCES User(id),
-    FOREIGN KEY (group_id) REFERENCES Group(id)
-)
+    FOREIGN KEY (user_id) REFERENCES Usr(id),
+    FOREIGN KEY (group_id) REFERENCES Grp(id)
+);
 
-CREATE TABLE Event(
+CREATE TABLE Evnt(
     id INT PRIMARY KEY,
     beginning DATETIME,
     ending DATETIME,
-    title VARCHAR(100)
+    title VARCHAR(100),
     descr VARCHAR(500),
     place VARCHAR(100)
-)
+);
 
 CREATE TABLE Event_Group(
     event_id INT,
     group_id INT,
     PRIMARY KEY (group_id, event_id),
-    FOREIGN KEY (group_id) REFERENCES Group(id),
-    FOREIGN KEY (event_it) REFERENCES Event(id)
-)
+    FOREIGN KEY (group_id) REFERENCES Grp(id),
+    FOREIGN KEY (event_id) REFERENCES Evnt(id)
+);
 
 CREATE TABLE Event_user(
     event_id INT,
     user_id INT,
     PRIMARY KEY (user_id, event_id),
-    FOREIGN KEY (user_id) REFERENCES User(id),
-    FOREIGN KEY (event_id) REFERENCES Event(id)
+    FOREIGN KEY (user_id) REFERENCES Usr(id),
+    FOREIGN KEY (event_id) REFERENCES Evnt(id)
 )
