@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "YourBestie/gui/__pycache__": true,
+        "YourBestie/database/__pycache__": true,
+        "YourBestie/__pycache__": true,
+        ".venv/lib/python3.13/site-packages": true,
+        ".venv/lib/python3.13": true,
+        ".venv/lib": true,
+        ".venv/lib64": true
+    }
+}
