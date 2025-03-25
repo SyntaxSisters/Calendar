@@ -1,8 +1,10 @@
 from flet.core.gesture_detector import GestureDetector
 from datetime import date
-from day_view import day_view
-from calendar_view import calendar_view
-from typing import Callable, cast
+
+# from .login_page import login_view
+from .day_view import day_view
+from .month_view import calendar_view
+from typing import cast
 import flet as ft
 
 import components
@@ -12,6 +14,7 @@ import utils
 
 class gui:
     _calendar: calendar_view
+    # _login: login_view
     _current_date: date = date.today()
     _day_view: day_view
     _slider: GestureDetector

@@ -1,4 +1,3 @@
-from typing import Callable, cast
 import flet as ft
 from gui import gui
 def main(page: ft.Page):
@@ -11,5 +10,4 @@ def main(page: ft.Page):
     application = gui(page)
     application.refresh()
 
-# work app pls don't crash..
-_ = cast(Callable[[Callable[[ft.Page], None]], None], ft.app)(main)
+_ = ft.app(main) # pyright: ignore[reportUnknownMemberType]
