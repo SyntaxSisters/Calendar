@@ -1,3 +1,4 @@
+from turtle import reset
 import flet as ft
 from typing import Callable, cast
 from login import show_login  
@@ -8,3 +9,4 @@ def main(page: ft.Page):
 
 # it doesnt crash or duplicate guys are you proud
 _ = cast(Callable[[Callable[[ft.Page], None]], None], ft.app)(main)
+
