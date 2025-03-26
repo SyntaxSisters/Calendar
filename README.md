@@ -37,7 +37,17 @@
 ## 📋 Requirements  <a id="requirements"></a>
 Make sure you have the following installed:  
 - **Python 3.13 or higher**  
+  - Download from [https://www.python.org/downloads/](https://www.python.org/downloads/)  
 - **pip** (Python package manager)  
+  - Comes pre-installed with Python 3.13+   
+- **Virtual Environment** (optional but recommended)  
+  - Install using pip:  
+    ```bash
+    pip install virtualenv
+    ```
+- **Git** (optional for cloning the repository)  
+  - Download from [https://git-scm.com/](https://git-scm.com/)
+  - You can also decide to download it directly from the repo 
 
 
 
