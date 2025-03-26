@@ -3,7 +3,6 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/df97e8a6-1a4c-4888-904e-f12a02e686d1" width="128"/>
 </p>
-![image](https://github.com/user-attachments/assets/f869f3be-23f3-4850-9ab9-aa2c22fe7263)
 
 
 <h1 align="center">Your Bestie</h1>
