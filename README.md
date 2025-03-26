@@ -3,6 +3,8 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/df97e8a6-1a4c-4888-904e-f12a02e686d1" width="128"/>
 </p>
+![image](https://github.com/user-attachments/assets/f869f3be-23f3-4850-9ab9-aa2c22fe7263)
+
 
 <h1 align="center">Your Bestie</h1>
 <p align="center">A cross-platform calendar app built with Python and Flet</p>  
@@ -16,6 +18,7 @@
 ---
 
 ## 🚀 Features  
+
 ✅ Cross-platform compatibility (Windows & Linux)  
 ✅ Simple UI built with Python & Flet  
 ✅ Simple installation and setup  
@@ -31,13 +34,17 @@ Make sure you have the following installed:
 
 ## ⚙️ Installation & Setup  
 
+### On Windows
 1. Download and extract the project files.  
 2. Locate and run the `YourBestie.exe` file.  
 3. Wait 5-15 seconds for the application to start.  
 
 ### **Screenshots**
-<p align="center"> <img src="https://github.com/user-attachments/assets/fecde1c4-59a1-48d0-ac90-a0f437fb3cf0" width="400px"/> <img src="https://github.com/user-attachments/assets/09fe21a1-920f-46f5-b3e3-821f234c9e3c" width="400px"/> </p> 
+<p align="center"> <img src="https://github.com/user-attachments/assets/f869f3be-23f3-4850-9ab9-aa2c22fe7263" width="400px"/> <img src="https://github.com/user-attachments/assets/7784d410-6fb6-4394-b620-b1184e6bbe52" width="400px"/> </p> 
 
+### **🎥 Demo Videos**
+[![Team View](http://i.ytimg.com/vi/b4OrERIiaic/hqdefault.jpg)](https://www.youtube.com/watch?v=b4OrERIiaic)
+[![Admin View](http://i.ytimg.com/vi/1eeQM04vy3M/hqdefault.jpg)](https://www.youtube.com/watch?v=1eeQM04vy3M)
 ---
 
 ### **📜 License**
