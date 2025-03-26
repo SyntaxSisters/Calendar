@@ -19,7 +19,7 @@ except Exception as e:
 
 
 def show_login(page: ft.Page):
-    page.title = "Your Bestie Login"
+    page.title = "Your Bestie"
     page.theme_mode = ft.ThemeMode.DARK
     page.bgcolor = ft.colors.BLACK
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
