@@ -1,4 +1,3 @@
-# calendar_view.py
 import calendar
 from datetime import date
 from typing import Callable, cast, override
@@ -8,16 +7,9 @@ from database import event
 from . import day_widget
 
 class calendar_view(ft.Column):
-    _selected_day: date
-    _date_error: ft.Text = ft.Text("", color=ft.Colors.ON_ERROR, size=14)
-    _start_date: date
-    _end_date: date
-    _date_display: ft.TextButton
-    _on_day_click: Callable[[date], None]
-    _header: ft.Row
-
-    def __init__(self, selected_day: date, on_day_click: Callable[[date], None]):
+    def __init__(self, selected_day: date, on_day_click: Callable[[date], None], team: str):
         super().__init__()
+        self._team = team
         self._start_date = selected_day.replace(day=1)
         self._end_date = get_last_date_in_month(selected_day)
         self._selected_day = selected_day
@@ -83,8 +75,8 @@ class calendar_view(ft.Column):
                 day = calendar_start + relativedelta(days=offset)
 
                 is_in_current_month = (self._start_date <= day <= self._end_date)
-                #  event colors for this day
-                day_events = event.calendar_events.get_events_for_day(day)
+                # Filter events based on team.
+                day_events = event.calendar_events.get_events_for_day(day, self._team)
                 colors_list = [ev.color for ev in day_events]
 
                 widget = day_widget.day_widget(
@@ -139,7 +131,6 @@ class calendar_view(ft.Column):
 
     def update_page(self):
         cast(ft.Page, self.page).update()
-
 
 def get_last_date_in_month(day: date):
     import calendar

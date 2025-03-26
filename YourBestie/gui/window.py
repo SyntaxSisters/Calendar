@@ -1,4 +1,3 @@
-# window.py
 from flet.core.gesture_detector import GestureDetector
 from datetime import date
 from .day_view import day_view
@@ -7,19 +6,17 @@ from typing import cast
 import flet as ft
 
 class gui:
-    _calendar: calendar_view
     _current_date: date = date.today()
-    _day_view: day_view
-    _slider: GestureDetector
-    _page: ft.Page
-
-    def __init__(self, page: ft.Page):
+    
+    def __init__(self, page: ft.Page, team: str):
+        self._team = team
         self._page = page
-        self._calendar = calendar_view(self._current_date, self.on_day_click)
+        # Pass the team to both the calendar and day views.
+        self._calendar = calendar_view(self._current_date, self.on_day_click, team=self._team)
         self._calendar.expand = False
         self._calendar.adaptive = False
 
-        self._day_view = day_view(date.today(), on_calendar_refresh=self.refresh_calendar)
+        self._day_view = day_view(date.today(), on_calendar_refresh=self.refresh_calendar, team=self._team)
         self._day_view.expand = True
 
         self._slider = ft.GestureDetector(
@@ -34,14 +31,12 @@ class gui:
         ]
 
     def on_day_click(self, clicked_day: date):
-        """Update the selected date in day_view and refresh."""
         self._current_date = clicked_day
         self._day_view.select_day(clicked_day)
         self._calendar.update()
         self._page.update()
 
     def refresh_calendar(self):
-        """Rebuild the calendar to update the color circles."""
         self._calendar.build()
         self._calendar.update()
         self._page.update()
@@ -50,9 +45,7 @@ class gui:
         min_width, max_width = 200, 1000
         if e.delta_x > 0 and self._day_view.width and self._day_view.width < max_width:
             self._day_view.width = min(self._day_view.width + e.delta_x, max_width)
-        elif (
-            e.delta_x < 0 and self._day_view.width and self._day_view.width > min_width
-        ):
+        elif e.delta_x < 0 and self._day_view.width and self._day_view.width > min_width:
             self._day_view.width = max(self._day_view.width + e.delta_x, min_width)
         self._day_view.update()
 

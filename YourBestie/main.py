@@ -1,15 +1,10 @@
-from typing import Callable, cast
 import flet as ft
-from gui.window import gui
+from typing import Callable, cast
+from login import show_login  
 
 def main(page: ft.Page):
-    """Entry point of application. This is called from Flet's initializer.
+    # lock em out and show login
+    show_login(page)
 
-    Args:
-        page (ft.Page): the Flet Page used to handle the window
-    """
-    application = gui(page)
-    application._page.update() # pyright: ignore[reportUnknownMemberType,reportPrivateUsage]
-
-# work app pls don't crash..    
+# it doesnt crash or duplicate guys are you proud
 _ = cast(Callable[[Callable[[ft.Page], None]], None], ft.app)(main)
