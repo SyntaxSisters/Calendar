@@ -18,7 +18,7 @@ CREATE TABLE Usr_Grp(
 );
 
 CREATE TABLE Evnt(
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY,
     beginning DATETIME,
     ending DATETIME,
     title VARCHAR(100),
