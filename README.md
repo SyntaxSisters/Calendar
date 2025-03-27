@@ -53,11 +53,14 @@ Make sure you have the following installed:
 
 ## 🛠️ Installation <a id="installation"></a>
 
-### 🎥 Full User Setup Guide (Video)
+### 👥 Full User Setup Guide
 If you prefer a visual walkthrough for the quick install, check out the installation video below:
 
 [![Watch the Full Installation Guide](http://img.youtube.com/vi/g7hemQpFnPU/hqdefault.jpg)](https://youtu.be/g7hemQpFnPU)
 
+#### Quick Installation Steps:
+1. Download your OS' executable file from official release page
+2. Run the file
 
 ### 📦 Detailed Installation Instructions
 
