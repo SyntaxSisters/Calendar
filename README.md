@@ -53,6 +53,14 @@ Make sure you have the following installed:
 
 ## 🛠️ Installation <a id="installation"></a>
 
+### 🎥 Full User Setup Guide (Video)
+If you prefer a visual walkthrough for the quick install, check out the installation video below:
+
+[![Watch the Full Installation Guide](http://img.youtube.com/vi/g7hemQpFnPU/hqdefault.jpg)](https://youtu.be/g7hemQpFnPU)
+
+
+### 📦 Detailed Installation Instructions
+
 ### Windows
 1. **Install Python 3.13+**
    - Download from: [https://www.python.org/downloads/](https://www.python.org/downloads/)
@@ -65,7 +73,7 @@ Make sure you have the following installed:
 2. **Clone the repo**  
       Use the following command to clone the repository:
       ```bash
-      git clone https://github.com/SyntaxSisters/Calendar.git
+      git clone https://github.com/SyntaxSisters/Calendar/tree/CALENDARFINAL
       ```
 3. **Navigate to the project directory**  
       After cloning, move into the project directory:
@@ -83,7 +91,7 @@ Make sure you have the following installed:
 2. **Clone the repo**  
       Use the following command to clone the repository:
       ```bash
-      git clone https://github.com/SyntaxSisters/Calendar.git
+      https://github.com/SyntaxSisters/Calendar/tree/CALENDARFINAL
       ```
 3. **Navigate to the project directory**  
       After cloning, move into the project directory:
