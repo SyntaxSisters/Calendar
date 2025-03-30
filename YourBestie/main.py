@@ -1,4 +1,3 @@
-from turtle import reset
 import flet as ft
 from typing import Callable, cast
 from login import show_login  
