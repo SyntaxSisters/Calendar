@@ -143,15 +143,9 @@ Distributed under the **GPL-3.0 License**. See **LICENSE** for more information.
 ## 👥 Contributors <a id="contributors"></a>
 Thanks to everyone who worked on this project! 🎉  
 
-<p align="center">
-  <img src="https://avatars.githubusercontent.com/u/53645851?v=4" width="80" height="80" style="border-radius: 50;">
-  <img src="https://avatars.githubusercontent.com/u/105088697?v=4" width="80" height="80" style="border-radius: 50;">
-  <img src="https://avatars.githubusercontent.com/u/132782701?v=4" width="80" height="80" style="border-radius: 50;">
-  <img src="https://avatars.githubusercontent.com/u/169546501?v=4" width="80" height="80" style="border-radius: 50;">
-  <img src="https://avatars.githubusercontent.com/u/181520537?v=4" width="80" height="80" style="border-radius: 50;">
-  <img src="https://avatars.githubusercontent.com/u/181734167?v=4" width="80" height="80" style="border-radius: 50;">
-</p>
-
+<a href="https://github.com/SyntaxSisters/Calendar/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=SyntaxSisters/Calendar" />
+</a>
 
 <p align="right">(<a href="#readme-top">🔝 back to top</a>)</p>
 
