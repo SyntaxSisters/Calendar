@@ -37,11 +37,32 @@
 ## 📋 Requirements  <a id="requirements"></a>
 Make sure you have the following installed:  
 - **Python 3.13 or higher**  
+  - Download from [https://www.python.org/downloads/](https://www.python.org/downloads/)  
 - **pip** (Python package manager)  
+  - Comes pre-installed with Python 3.13+   
+- **Virtual Environment** (optional but recommended)  
+  - Install using pip:  
+    ```bash
+    pip install virtualenv
+    ```
+- **Git** (optional for cloning the repository)  
+  - Download from [https://git-scm.com/](https://git-scm.com/)
+  - You can also decide to download it directly from the repo 
 
 
 
 ## 🛠️ Installation <a id="installation"></a>
+
+### 👥 Full User Setup Guide
+If you prefer a visual walkthrough for the quick install, check out the installation video below:
+
+[![Watch the Full Installation Guide](http://img.youtube.com/vi/g7hemQpFnPU/hqdefault.jpg)](https://youtu.be/g7hemQpFnPU)
+
+#### Quick Installation Steps:
+1. Download your OS' executable file from official release page
+2. Run the file
+
+### 📦 Detailed Installation Instructions
 
 ### Windows
 1. **Install Python 3.13+**
@@ -55,7 +76,7 @@ Make sure you have the following installed:
 2. **Clone the repo**  
       Use the following command to clone the repository:
       ```bash
-      git clone https://github.com/SyntaxSisters/Calendar.git
+      git clone https://github.com/SyntaxSisters/Calendar/tree/CALENDARFINAL
       ```
 3. **Navigate to the project directory**  
       After cloning, move into the project directory:
@@ -70,8 +91,16 @@ Make sure you have the following installed:
    sudo apt update
    sudo apt install python3.13
    
-2.  **Download and Run**
-     - Download and extract the project files.  
+2. **Clone the repo**  
+      Use the following command to clone the repository:
+      ```bash
+      https://github.com/SyntaxSisters/Calendar/tree/CALENDARFINAL
+      ```
+3. **Navigate to the project directory**  
+      After cloning, move into the project directory:
+      ```bash
+      cd Calendar
+      ``` 
 
 ## Usage <a id="usage"></a>
 
@@ -102,7 +131,7 @@ Make sure you have the following installed:
 ### **Screenshots**
 <p align="center"> <img src="https://github.com/user-attachments/assets/f869f3be-23f3-4850-9ab9-aa2c22fe7263" width="400px"/> <img src="https://github.com/user-attachments/assets/7784d410-6fb6-4394-b620-b1184e6bbe52" width="400px"/> </p> 
 
-### **🎥 Demo Videos**
+### **Demo Videos**
 [![Team View](http://i.ytimg.com/vi/b4OrERIiaic/hqdefault.jpg)](https://www.youtube.com/watch?v=b4OrERIiaic)
 [![Admin View](http://i.ytimg.com/vi/1eeQM04vy3M/hqdefault.jpg)](https://www.youtube.com/watch?v=1eeQM04vy3M)
     ---
@@ -122,7 +151,6 @@ Thanks to everyone who worked on this project! 🎉
   <img src="https://avatars.githubusercontent.com/u/181520537?v=4" width="80" height="80" style="border-radius: 50;">
   <img src="https://avatars.githubusercontent.com/u/181734167?v=4" width="80" height="80" style="border-radius: 50;">
 </p>
-
 
 <p align="right">(<a href="#readme-top">🔝 back to top</a>)</p>
 

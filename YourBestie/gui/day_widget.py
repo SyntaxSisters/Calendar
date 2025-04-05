@@ -15,85 +15,115 @@ class day_widget(ft.Container):
         in_range: bool = False,
         highlight: bool = False,
         day_click_event: Callable[[date], Any] | None = None,
-        colors: list[str] = None
+        colors: list[str] = None,
     ):
         super().__init__()
         self._day = day
         self._in_range = in_range
         self._day_click_event = day_click_event
-        self.width = 80
-        self.height = 80
-        self.border = ft.border.all(color=ft.Colors.OUTLINE, width=1)
+        self.width = 100
+        self.height = 100
         self.border_radius = 15
         self.on_click = self.day_clicked
         self.on_hover = self.handle_hover  # hover trigger
+        self.animate = ft.Animation(200, "easeInOut") # fancy animation
 
         if colors is None:
             colors = []
 
-        # dim the text if this day is out-of-range.
-        text_opacity = 1.0 if self._in_range else 0.3
-
-        # highlight if selected.
+        # highlight if selected
         if highlight:
             self.bgcolor = ft.Colors.SECONDARY_CONTAINER
+        elif self._day == date.today():
+            self.bgcolor = ft.colors.with_opacity(0.08, ft.colors.PRIMARY)
+        elif not self._in_range:
+            self.bgcolor = ft.colors.SURFACE_VARIANT
+        else:
+            self.bgcolor = ft.colors.SURFACE
 
-        # Limited row when not hovered =  3 circles +  "+N"
-        max_show = 3
-        limited_controls = []
-        for c in colors[:max_show]:
-            limited_controls.append(
-                ft.Container(width=12, height=12, border_radius=6, bgcolor=c)
+        self.border = ft.border.all(color=ft.Colors.OUTLINE, width=1)
+
+        # soft glow
+        self.shadow = ft.BoxShadow(
+            blur_radius=6, spread_radius=0, color=ft.colors.with_opacity(0.1, ft.colors.PRIMARY)
+        )
+
+        # dim the text if this day is out-of-range.
+        text_opacity = 1.0 if self._in_range else 0.3
+        
+        # moved day number back to the top left and changed the badge wrapping
+        day_label = ft.Text(str(day.day), size=14, weight=ft.FontWeight.BOLD, opacity=text_opacity)
+
+        preview_dots = colors[:2]
+        hidden_dots = colors[2:]
+
+        # Limited row when not hovered =  2 circles +  "+N"
+        preview_row_controls = [
+            day_label
+        ] + [
+            ft.Container(
+                width=10,
+                height=10,
+                bgcolor=c,
+                border_radius=99,
+                margin=ft.Margin(2, 0, 0, 0),
+                shadow=ft.BoxShadow(blur_radius=1, color=ft.colors.with_opacity(0.15, c)),
+                border=ft.border.all(1, ft.colors.with_opacity(0.2, ft.colors.BLACK)),
             )
-        extra_count = len(colors) - max_show
-        if extra_count > 0:
-            limited_controls.append(ft.Text(f"+{extra_count}", size=11))
+            for c in preview_dots
+        ]
 
-        self.limited_row = ft.Row(
-            controls=limited_controls,
+        if len(hidden_dots) > 0:
+            self.plus_more = ft.Text(f"+{len(hidden_dots)}", size=11, opacity=0.7)
+            preview_row_controls.append(self.plus_more)
+        else:
+            self.plus_more = None
+
+        self.preview_row = ft.Row(
+            controls=preview_row_controls,
+            alignment=ft.MainAxisAlignment.START,
             spacing=4,
-            visible=True  
+            visible=True
         )
 
-        # "Full" view when hovered:  circles in rows of 5
-        all_rows = []
+        # "Full" view:  circles in rows of 5
+        all_dot_rows = []
         for chunk in chunk_list(colors, 5):
-            row_controls = []
-            for c in chunk:
-                row_controls.append(
-                    ft.Container(width=12, height=12, border_radius=6, bgcolor=c)
+            row_controls = [
+                ft.Container(
+                    width=10,
+                    height=10,
+                    bgcolor=c,
+                    border_radius=99,
+                    shadow=ft.BoxShadow(blur_radius=1, color=ft.colors.with_opacity(0.15, c)),
+                    border=ft.border.all(1, ft.colors.with_opacity(0.2, ft.colors.BLACK)),
                 )
-            all_rows.append(ft.Row(controls=row_controls, spacing=4))
+                for c in chunk
+            ]
+            all_dot_rows.append(ft.Row(controls=row_controls, spacing=4))
 
-        self.all_circles_column = ft.Column(
-            controls=all_rows,
+        self.full_view_column = ft.Column(
+            controls=all_dot_rows,
             spacing=4,
-            visible=False 
+            visible=False,
         )
-
-        # moved day number at the bottom for teh badges
-
-        day_label = ft.Text(str(day.day), size=20, opacity=text_opacity)
-
+        
+        self.dot_column = ft.Column(
+            controls=[self.preview_row, self.full_view_column],
+            spacing=4,
+        )
 
         #build
         self.content_column = ft.Column(
-            width=80,
-            height=80,
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,  
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            width=100,
+            height=100,
+            alignment=ft.MainAxisAlignment.START,
+            horizontal_alignment=ft.CrossAxisAlignment.START,
             controls=[
-                # At the top,  keep both sets of badges, toggling visibility on hover
-                ft.Column(
-                    spacing=2,
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                    controls=[
-                        self.limited_row,
-                        self.all_circles_column,
-                    ],
-                ),
-                # The day label near the bottom
-                day_label,
+                ft.Container(
+                    content=self.dot_column,
+                    padding=ft.Padding(6, 6, 6, 0),
+                )
             ],
         )
 
@@ -101,15 +131,59 @@ class day_widget(ft.Container):
 
     def day_clicked(self, _: ControlEvent):
         """When the user clicks this day, call the callback if provided."""
+        self.shadow = ft.BoxShadow(
+            blur_radius=12,
+            spread_radius=4,
+            color=ft.colors.with_opacity(0.3, ft.colors.PRIMARY),
+        )
+        self.update()
+
+        def reset_glow():
+            self.shadow = ft.BoxShadow(
+                blur_radius=6,
+                spread_radius=1,
+                color=ft.colors.with_opacity(0.15, ft.colors.PRIMARY),
+            )
+            self.update()
+
+        import threading
+        threading.Timer(0.2, reset_glow).start()
+
         if self._day_click_event:
             self._day_click_event(self._day)
 
     def handle_hover(self, e: ft.HoverEvent):
         """
-        On hover, hide the "limited" row and show the "full" circles.
+        On hover, hide the "limited" row and show the "full" circles and applies a soft glowing shadow..
         On hover-out, restore the limited row.
         """
         hovering = (e.data == "true")
-        self.limited_row.visible = not hovering
-        self.all_circles_column.visible = hovering
-        self.content_column.update()
+
+        # if there are event dots, toggle them
+        if hasattr(self, "preview_row") and hasattr(self, "full_view_column"):
+            self.preview_row.visible = not hovering
+            self.full_view_column.visible = hovering
+            if self.plus_more:
+                self.plus_more.visible = not hovering
+            self.dot_column.update()
+
+        # hover shadow glow
+        self.shadow = (
+            ft.BoxShadow(
+                blur_radius=8,
+                spread_radius=2,
+                color=ft.colors.with_opacity(0.25, ft.colors.PRIMARY),
+                offset=ft.Offset(0, 2),
+            )
+            if hovering
+            else ft.BoxShadow(
+                blur_radius=3,
+                spread_radius=0,
+                color=ft.colors.with_opacity(0.08, ft.colors.PRIMARY),
+                offset=ft.Offset(0, 1),
+            )
+        )
+
+        self.update()
+
+
